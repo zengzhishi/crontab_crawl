@@ -1,0 +1,10 @@
+appdirs==1.4.3
+backports-abc==0.5
+backports.ssl-match-hostname==3.5.0.1
+beautifulsoup4==4.5.3
+certifi==2017.1.23
+packaging==16.8
+pyparsing==2.2.0
+singledispatch==3.4.0.3
+six==1.10.0
+tornado==4.4.2
