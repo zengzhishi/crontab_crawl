@@ -44,7 +44,7 @@ logging.basicConfig(level=logging.DEBUG,
     filemode='w') 
 chinese_bracket = [u'\u3010', u'\u3011']
 
-MONGODB_HOST = 'localhost'
+MONGODB_HOST = '119.29.177.221'
 MONGODB_PORT = 27017
 MONGODB_NAME = 'crawl_data'
 mongo_conn = None
@@ -54,7 +54,12 @@ class Mongo_conn():
         self.get_mongo_conn()
 
     def get_mongo_conn(self, host=MONGODB_HOST, port=MONGODB_PORT, db_name = MONGODB_NAME):
-        self.conn = MongoClient(host, port)
+        user = 'spider'
+        pwd = 'linux2017'
+        mongo_uri = 'mongodb://' + user + ':' + pwd + '@' + host + ':' + str(port) + '/' + db_name
+        print mongo_uri
+#        self.conn = MongoClient(host, port)
+        self.conn = MongoClient(mongo_uri)
         self.db = self.conn[db_name]
 
     def get_mongo_col(self, col_name):
@@ -66,9 +71,7 @@ class Mongo_conn():
             output_param
                 col     <collection>
         """
-        print 'get col'
         self.col = self.db[col_name]
-        print self.col
         return self.col
 
     def get_mongo_db(self):
@@ -153,6 +156,7 @@ def saving_func(save_result):
     col_name = 'dxy'
     col = mongo_conn.get_mongo_col(col_name)
     col.insert(save_result)
+    print 'insert complete'
     return True
 
 
